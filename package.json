@@ -1,0 +1,17 @@
+{
+  "name": "quero-eventos",
+  "version": "1.0.0",
+  "description": "Projeto destinado ao estudo de Autenticacão JWT, REST, RESTful e NOsql.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "plop": "^3.1.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.10"
+  }
+}
