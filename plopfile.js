@@ -12,17 +12,17 @@ module.exports = function (plop) {
         {
           type: 'add',
           path: 'src/components/{{pascalCase name}}/index.js',
-          templateFile: 'plop-templates/component/index.js.hbs'
+          templateFile: 'plop-templates/index.js.hbs'
         },
         {
           type: 'add',
           path: 'src/components/{{pascalCase name}}/{{pascalCase name}}.js',
-          templateFile: 'plop-templates/component/component.js.hbs'
+          templateFile: 'plop-templates/component.js.hbs'
         },
         {
           type: 'add',
           path: 'src/components/{{pascalCase name}}/styles.js',
-          templateFile: 'plop-templates/component/styles.js.hbs'
+          templateFile: 'plop-templates/styles.js.hbs'
         }
       ]
     });
