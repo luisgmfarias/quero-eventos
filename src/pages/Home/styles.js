@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-const HomeStyles = styled.div`
+export const HomeStyles = styled.div`
   /* Estilos do componente */
 `;
-
-export default HomeStyles;
