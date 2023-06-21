@@ -1,23 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HeaderContainer } from './styles';
 
 const Header = () => {
   return (
-    <header>
+    <HeaderContainer>
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/">Sobre</Link>
           </li>
           <li>
-            <Link to="/contato">Contato</Link>
+            <Link to="/contato"></Link>
           </li>
           <li>
-            <Link to="/sobre">Sobre</Link>
+            <Link to="/sobre">Contato</Link>
           </li>
         </ul>
       </nav>
-    </header>
+    </HeaderContainer>
   );
 };
 
