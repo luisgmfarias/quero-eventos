@@ -1,9 +1,12 @@
-import React from 'react';
-import Login from '../../components/Login/Login';
+import React from "react";
+import Login from "../../components/Login/Login";
+import { HomeContainer } from "./styles";
 
 const Home = () => {
   return (
-    <Login />
+    <HomeContainer>
+      <Login />
+    </HomeContainer>
   );
 };
 
