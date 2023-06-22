@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
 
-  padding: 20px;
 
   nav > ul {
     display: flex;
@@ -16,6 +15,16 @@ export const HeaderContainer = styled.header`
   li {
     list-style: none;
     text-align: center;
-    width: 100px;
+    width: 300px;
+
+    a{
+      text-decoration: 0;
+      color: #002250;
+    }
+
+    img{
+      width: 200px;
+    }
+
   }
 `;

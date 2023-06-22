@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { HeaderContainer } from './styles';
+import React from "react";
+import { Link } from "react-router-dom";
+import { HeaderContainer } from "./styles";
+import logo from "../../assets/quero-logo.png";
 
 const Header = () => {
   return (
@@ -8,13 +9,15 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Sobre</Link>
+            <Link to="/sobre">Sobre</Link>
           </li>
           <li>
-            <Link to="/contato"></Link>
+            <Link to="/">
+              <img src={logo} alt="logo" />
+            </Link>
           </li>
           <li>
-            <Link to="/sobre">Contato</Link>
+            <Link to="/contato">Contato</Link>
           </li>
         </ul>
       </nav>
