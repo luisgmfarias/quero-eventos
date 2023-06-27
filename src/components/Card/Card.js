@@ -1,8 +1,15 @@
 import React from "react";
-import { CardWrapper } from "./styles";
+import { CardContainer, CardHeader, CardHeading } from "./styles";
 
-const Card = ({ children }) => {
-  return <CardWrapper>{children}</CardWrapper>;
+const Card = ({ children, header }) => {
+  return (
+    <CardContainer>
+      <CardHeader>
+        <CardHeading>{header}</CardHeading>
+      </CardHeader>
+      {children}
+    </CardContainer>
+  );
 };
 
 export default Card;
