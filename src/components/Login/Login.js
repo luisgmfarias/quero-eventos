@@ -1,10 +1,8 @@
 import React from "react";
 import {
-  CardHeader,
-  CardHeading,
+  CardWrapper,
   CardBody,
   CardFieldset,
-  CardButton,
   CardInput,
   CardLink,
 } from "./styles";
@@ -12,6 +10,7 @@ import Card from "../Card/Card";
 import { useState } from "react";
 import { login } from "../../services/auth";
 import { cadastrar } from "../../services/auth";
+import Button from "../Button/Button";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -23,11 +22,12 @@ const Login = () => {
       const dadosLogin = {
         user,
         senha,
-        // Adicione outros campos do formulário de cadastro
+        
       };
       const response = await login(dadosLogin);
 
       localStorage.setItem("token", response.token);
+      localStorage.setItem("user", user);
 
       setUser("");
       setSenha("");
@@ -41,16 +41,17 @@ const Login = () => {
       const dadosCadastro = {
         user,
         senha,
-        // Adicione outros campos do formulário de cadastro
+        
       };
 
       await cadastrar(dadosCadastro);
       setUser("");
       setSenha("");
+      setIsLogin(true);
 
-      // Exibir uma mensagem de sucesso ou redirecionar para outra página
+      
     } catch (error) {
-      // Lógica para tratar o erro de cadastro (exibição de mensagem de erro, etc.)
+      
       console.error(error);
     }
   };
@@ -60,48 +61,44 @@ const Login = () => {
   };
 
   return (
-    <Card>
-      <CardHeader>
-        <CardHeading>{isLogin ? "Login" : "Cadastrar"}</CardHeading>
-      </CardHeader>
+    <CardWrapper>
+      <Card header={isLogin ? "Login" : "Cadastrar"}>
+        <CardBody>
+          <CardFieldset>
+            <CardInput
+              placeholder="Username"
+              type="text"
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              required
+            />
+          </CardFieldset>
 
-      <CardBody>
-        <CardFieldset>
-          <CardInput
-            placeholder="Username"
-            type="text"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            required
-          />
-        </CardFieldset>
+          <CardFieldset>
+            <CardInput
+              placeholder="Password"
+              type="password"
+              value={senha}
+              onChange={(e) => setSenha(e.target.value)}
+              required
+            />
+          </CardFieldset>
 
-        <CardFieldset>
-          <CardInput
-            placeholder="Password"
-            type="password"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-            required
-          />
-        </CardFieldset>
+          <CardFieldset>
+            <Button
+              title={isLogin ? "Entrar" : "Cadastrar"}
+              onClick={isLogin ? handleLogin : handleCadastro}
+            ></Button>
+          </CardFieldset>
 
-        <CardFieldset>
-          <CardButton
-            type="button"
-            onClick={isLogin ? handleLogin : handleCadastro}
-          >
-            {isLogin ? "Entrar" : "Cadastrar"}
-          </CardButton>
-        </CardFieldset>
-
-        <CardFieldset>
-          <CardLink onClick={handleToggleLogin}>
-            {!isLogin ? "Opa, eu já tenho uma conta!" : " Primeira vez?"}
-          </CardLink>
-        </CardFieldset>
-      </CardBody>
-    </Card>
+          <CardFieldset>
+            <CardLink onClick={handleToggleLogin}>
+              {!isLogin ? "Opa, eu já tenho uma conta!" : " Primeira vez?"}
+            </CardLink>
+          </CardFieldset>
+        </CardBody>
+      </Card>
+    </CardWrapper>
   );
 };
 

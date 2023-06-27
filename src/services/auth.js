@@ -40,3 +40,7 @@ export const cadastrar = async (dadosCadastro) => {
     throw new Error(error.message);
   }
 };
+
+export const getTokenFromLocalStorage = () => {
+  return localStorage.getItem("token");
+};

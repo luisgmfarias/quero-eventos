@@ -29,7 +29,6 @@ userSchema.pre("save", async function (next) {
   }
 });
 
-// Função para comparar a senha digitada com a senha criptografada do usuário
 userSchema.methods.comparePassword = async function (senha) {
   try {
     return await bcrypt.compare(senha, this.senha);

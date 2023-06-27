@@ -7,26 +7,23 @@ const User = require("../models/users");
 
 const jwtSecret = "secret";
 
-// Rota de login
 router.post("/login", async (req, res, next) => {
   try {
     const { user, senha } = req.body;
 
-    // Verificar se o usuário está cadastrado
     const usuario = await User.findOne({ user });
 
     if (!usuario) {
       return res.status(401).json({ mensagem: "Usuário não encontrado." });
     }
 
-    // Verificar se a senha está correta
     const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
 
     if (!senhaCorreta) {
       return res.status(401).json({ mensagem: "Senha incorreta." });
     }
     const token = jwt.sign({ user: usuario.user }, jwtSecret, {
-      expiresIn: "1h",
+      expiresIn: "3s",
     });
 
     res.status(200).json({ token });
@@ -40,10 +37,6 @@ router.post("/login", async (req, res, next) => {
 router.post("/cadastro", async (req, res, next) => {
   try {
     const { user, senha } = req.body;
-
-    // Aqui você pode adicionar validações dos campos, como verificar se o user já existe, validar a senha, etc.
-
-    // Crie um novo usuário no banco de dados
     const novoUsuario = new User({
       user,
       senha,
