@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 const eventSchema = new mongoose.Schema({
   title: {
@@ -12,6 +11,11 @@ const eventSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    required: true,
+  },
+  owner: {
+    type: String,
+    ref: "User",
     required: true,
   },
   participants: [
