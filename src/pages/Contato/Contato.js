@@ -4,7 +4,7 @@ import { ContatoStyles } from './styles';
 const Contato = () => {
   return (
     <ContatoStyles>
-      // Conteúdo do componente
+      
     </ContatoStyles>
   );
 };

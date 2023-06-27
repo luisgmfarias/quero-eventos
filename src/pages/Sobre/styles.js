@@ -1,5 +1,5 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
-export const SobreStyles = styled.div`
-  /* Estilos do componente */
+export const Container = styled.div`
+  padding: 20px;
 `;
