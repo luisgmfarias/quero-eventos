@@ -22,12 +22,8 @@ const Login = () => {
       const dadosLogin = {
         user,
         senha,
-        
       };
       const response = await login(dadosLogin);
-
-      localStorage.setItem("token", response.token);
-      localStorage.setItem("user", user);
 
       setUser("");
       setSenha("");
@@ -41,17 +37,13 @@ const Login = () => {
       const dadosCadastro = {
         user,
         senha,
-        
       };
 
       await cadastrar(dadosCadastro);
       setUser("");
       setSenha("");
       setIsLogin(true);
-
-      
     } catch (error) {
-      
       console.error(error);
     }
   };

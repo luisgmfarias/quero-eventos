@@ -22,7 +22,7 @@ router.post("/events", authMiddleware, async (req, res) => {
     res.status(500).json({ message: "Erro ao criar evento." });
   }
 });
-router.get("/events", async (req, res) => {
+router.get("/events", authMiddleware, async (req, res) => {
   try {
     const events = await Event.find();
 

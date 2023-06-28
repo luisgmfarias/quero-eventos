@@ -18,7 +18,7 @@ const validationSchema = Yup.object().shape({
   date: Yup.date().required("A data é obrigatória"),
 });
 
-const CreateEventFormCard = () => {
+const CreateEventFormCard = ({ onAddEvento }) => {
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -28,7 +28,8 @@ const CreateEventFormCard = () => {
     validationSchema,
     onSubmit: async (values) => {
       console.log(values);
-      await cadastrarEvento({ ...values, owner: localStorage.getItem("user")});
+      await cadastrarEvento({ ...values, owner: localStorage.getItem("user") });
+      onAddEvento({ ...values, owner: localStorage.getItem("user") });
     },
   });
   return (

@@ -1,11 +1,7 @@
 import React from "react";
 import CreateEventFormCard from "../CreateEventFormCard/CreateEventFormCard";
 import { useEffect, useState } from "react";
-import {
-  cadastrarEvento,
-  getEventos,
-  excluirEvento,
-} from "../../services/events";
+import { getEventos } from "../../services/events";
 import EventCard from "../EventCard/EventCard";
 import { EventListWrapper, ListWrapper } from "./styles";
 
@@ -16,6 +12,7 @@ const EventList = () => {
     const fetchEventos = async () => {
       try {
         const eventosData = await getEventos();
+        console.log(eventosData);
         setEventos(eventosData);
       } catch (error) {
         console.error(error);
@@ -23,10 +20,29 @@ const EventList = () => {
     };
 
     fetchEventos();
-  }, [eventos]);
+  }, []);
+
+  const handleUpdateEvento = (eventoId, updatedEvento) => {
+    setEventos((prevEventos) =>
+      prevEventos.map((evento) =>
+        evento._id === eventoId ? { ...evento, ...updatedEvento } : evento
+      )
+    );
+  };
+
+  const handleAddEvento = (novoEvento) => {
+    setEventos((prevEventos) => [...prevEventos, novoEvento]);
+  };
+
+  const handleDeleteEvento = (eventoId) => {
+    setEventos((prevEventos) =>
+      prevEventos.filter((evento) => evento._id !== eventoId)
+    );
+  };
+
   return (
     <EventListWrapper>
-      <CreateEventFormCard />
+      <CreateEventFormCard onAddEvento={handleAddEvento} />
       <ListWrapper>
         {eventos.map((evento) => (
           <EventCard
@@ -37,6 +53,8 @@ const EventList = () => {
             date={evento.date}
             participants={evento.participants}
             owner={evento.owner}
+            onUpdate={handleUpdateEvento}
+            onDelete={handleDeleteEvento}
           />
         ))}
       </ListWrapper>

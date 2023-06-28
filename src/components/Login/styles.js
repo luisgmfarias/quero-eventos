@@ -8,6 +8,9 @@ export const CardBody = styled.div`
 export const CardWrapper = styled.div`
   padding: 0 0 32px;
   margin: 48px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CardFieldset = styled.div`

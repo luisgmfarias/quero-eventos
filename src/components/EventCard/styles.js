@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const EventCardWrapper = styled.div`
   margin-left: 20px;
+  margin-bottom: 20px;
 `;
 
 export const CardBody = styled.div`

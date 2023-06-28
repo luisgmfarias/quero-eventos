@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 const User = require("../models/users");
 
-const jwtSecret = "secret";
 
 router.post("/login", async (req, res, next) => {
   try {
@@ -22,11 +22,13 @@ router.post("/login", async (req, res, next) => {
     if (!senhaCorreta) {
       return res.status(401).json({ mensagem: "Senha incorreta." });
     }
-    const token = jwt.sign({ user: usuario.user }, jwtSecret, {
-      expiresIn: "3s",
+    const token = jwt.sign({ user: usuario.user }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
     });
 
-    res.status(200).json({ token });
+    console.log("Token criado:" + token);
+
+    res.status(200).json({ token, userId: usuario._id });
     console.log("login feito");
   } catch (error) {
     console.error(error);
