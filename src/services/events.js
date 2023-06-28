@@ -2,31 +2,36 @@ import { getTokenFromLocalStorage } from "./auth";
 
 export const cadastrarEvento = async (values) => {
   try {
+    const token = getTokenFromLocalStorage();
+
     const response = await fetch("http://localhost:3001/api/events", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: "Bearer " + getTokenFromLocalStorage(),
+        Authorization: `${token}`,
       },
       body: JSON.stringify(values),
     });
 
-    // Verificar se o evento foi cadastrado com sucesso
     if (response.ok) {
-      // Exibir mensagem de sucesso ou redirecionar para outra página
       console.log("Evento cadastrado com sucesso!");
     } else {
       throw new Error("Erro ao cadastrar evento");
     }
   } catch (error) {
-    // Tratar o erro de cadastro do evento
     console.error("Erro ao cadastrar evento:", error);
   }
 };
 
 export const getEventos = async () => {
   try {
-    const response = await fetch("http://localhost:3001/api/events");
+    const token = getTokenFromLocalStorage();
+    const response = await fetch("http://localhost:3001/api/events", {
+      method: "GET",
+      headers: {
+        Authorization: `${token}`,
+      },
+    });
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -38,16 +43,42 @@ export const getEventos = async () => {
   }
 };
 
-// Atualizar um evento
+export const participarEvento = async (eventId, userId) => {
+  try {
+    const token = getTokenFromLocalStorage();
+
+    const response = await fetch(
+      `http://localhost:3001/api/events/${eventId}/participate`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify({"userId":userId}),
+      }
+    );
+
+    if (response.ok) {
+      console.log("Você esta participando do evento");
+    } else {
+      throw new Error("Erro ao participar do evento");
+    }
+  } catch (error) {
+    console.error("Erro participar do evento", error);
+  }
+};
+
 export const atualizarEvento = async (eventId, updatedEvent) => {
   try {
+    const token = getTokenFromLocalStorage();
     const response = await fetch(
       `http://localhost:3001/api/events/${eventId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: "Bearer " + getTokenFromLocalStorage(),
+          Authorization: `${token}`,
         },
         body: JSON.stringify(updatedEvent),
       }
@@ -65,14 +96,17 @@ export const atualizarEvento = async (eventId, updatedEvent) => {
   }
 };
 
-// Excluir um evento
 export const excluirEvento = async (eventId) => {
   try {
+    const token = getTokenFromLocalStorage();
     const response = await fetch(
       `http://localhost:3001/api/events/${eventId}`,
       {
         method: "DELETE",
-        Authorization: "Bearer " + getTokenFromLocalStorage(),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
       }
     );
 

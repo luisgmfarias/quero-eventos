@@ -11,6 +11,11 @@ export const login = async (dadosLogin) => {
     if (response.ok) {
       const data = await response.json();
       const token = data.token;
+      const userId = data.userId;
+      console.log(userId);
+
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", userId);
 
       return { token };
     } else {
@@ -42,5 +47,6 @@ export const cadastrar = async (dadosCadastro) => {
 };
 
 export const getTokenFromLocalStorage = () => {
+  console.log(localStorage.getItem("token"));
   return localStorage.getItem("token");
 };
