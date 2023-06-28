@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Login from "../../components/Login/Login";
 import EventList from "../../components/EventList/EventList";
-import { HomeContainer } from "./styles";
+import Button from "../../components/Button/Button";
+import { HomeContainer, ButtonWrapper } from "./styles";
 
 const Home = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,9 +22,16 @@ const Home = () => {
   };
   return (
     <HomeContainer>
-      {!isAuthenticated ? <Login /> : <EventList />}
-
-      <button onClick={handleLogout}/>
+      {!isAuthenticated ? (
+        <Login />
+      ) : (
+        <>
+          <ButtonWrapper>
+            <Button onClick={handleLogout} danger={true} title="Deslogar" />
+          </ButtonWrapper>
+          <EventList />
+        </>
+      )}
     </HomeContainer>
   );
 };

@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const Event = require("../models/events");
+const User = require("../models/users");
+
 const authMiddleware = require("../middlewares/authMiddleware");
 
 router.post("/events", authMiddleware, async (req, res) => {
@@ -89,6 +91,39 @@ router.delete("/events/:id", authMiddleware, (req, res) => {
     .catch((error) => {
       res.status(500).json({ error: "Erro ao excluir o evento" });
     });
+});
+
+router.post("/load", async (req, res) => {
+  const { USER_MOCK, EVENT_MOCKS } = require("./mocks");
+
+  try {
+    const user = USER_MOCK.user;
+    const senha = USER_MOCK.senha;
+    const novoUsuario = new User({
+      user: user,
+      senha: senha,
+    });
+
+    await novoUsuario.save();
+
+    const usuario = await User.findOne({ user });
+
+    EVENT_MOCKS.map(async (event) => {
+      const newEvent = new Event({
+        title: event.title,
+        description: event.description,
+        owner: usuario._id,
+        date: event.date,
+      });
+
+      await newEvent.save();
+    });
+
+    res.status(201).json({ message: "Mocks adicionados!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erro ao adicionar os dados!" });
+  }
 });
 
 module.exports = router;

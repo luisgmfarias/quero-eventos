@@ -27,7 +27,6 @@ const CreateEventFormCard = ({ onAddEvento }) => {
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
       await cadastrarEvento({ ...values, owner: localStorage.getItem("user") });
       onAddEvento({ ...values, owner: localStorage.getItem("user") });
     },

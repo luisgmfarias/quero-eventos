@@ -26,8 +26,6 @@ router.post("/login", async (req, res, next) => {
       expiresIn: "1h",
     });
 
-    console.log("Token criado:" + token);
-
     res.status(200).json({ token, userId: usuario._id });
     console.log("login feito");
   } catch (error) {

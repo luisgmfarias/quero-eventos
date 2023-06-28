@@ -12,7 +12,6 @@ const EventList = () => {
     const fetchEventos = async () => {
       try {
         const eventosData = await getEventos();
-        console.log(eventosData);
         setEventos(eventosData);
       } catch (error) {
         console.error(error);

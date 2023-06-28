@@ -125,6 +125,10 @@ const EventCard = ({
                 title="Participar do evento"
               />
             )}
+
+            {localStorage.getItem("user") !== owner && isParticipant && (
+              <strong>Estou participando</strong>
+            )}
           </CardFieldset>
         </CardBody>
       </Card>
