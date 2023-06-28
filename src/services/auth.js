@@ -1,6 +1,6 @@
 export const login = async (dadosLogin) => {
   try {
-    const response = await fetch("http://localhost:3001/api/auth/login", {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ export const login = async (dadosLogin) => {
 
 export const cadastrar = async (dadosCadastro) => {
   try {
-    const response = await fetch("http://localhost:3001/api/auth/cadastro", {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}auth/cadastro`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

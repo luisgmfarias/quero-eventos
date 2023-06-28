@@ -4,7 +4,7 @@ export const cadastrarEvento = async (values) => {
   try {
     const token = getTokenFromLocalStorage();
 
-    const response = await fetch("http://localhost:3001/api/events", {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}events`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const cadastrarEvento = async (values) => {
 export const getEventos = async () => {
   try {
     const token = getTokenFromLocalStorage();
-    const response = await fetch("http://localhost:3001/api/events", {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_HOST}events`, {
       method: "GET",
       headers: {
         Authorization: `${token}`,
@@ -48,7 +48,7 @@ export const participarEvento = async (eventId, userId) => {
     const token = getTokenFromLocalStorage();
 
     const response = await fetch(
-      `http://localhost:3001/api/events/${eventId}/participate`,
+      `${process.env.REACT_APP_SERVER_HOST}events/${eventId}/participate`,
       {
         method: "POST",
         headers: {
@@ -73,7 +73,7 @@ export const atualizarEvento = async (eventId, updatedEvent) => {
   try {
     const token = getTokenFromLocalStorage();
     const response = await fetch(
-      `http://localhost:3001/api/events/${eventId}`,
+      `${process.env.REACT_APP_SERVER_HOST}events/${eventId}`,
       {
         method: "PUT",
         headers: {
@@ -100,7 +100,7 @@ export const excluirEvento = async (eventId) => {
   try {
     const token = getTokenFromLocalStorage();
     const response = await fetch(
-      `http://localhost:3001/api/events/${eventId}`,
+      `${process.env.REACT_APP_SERVER_HOST}events/${eventId}`,
       {
         method: "DELETE",
         headers: {
