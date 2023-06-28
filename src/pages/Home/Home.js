@@ -9,7 +9,6 @@ const Home = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      console.log(token);
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
